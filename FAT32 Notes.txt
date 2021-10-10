@@ -1,0 +1,28 @@
+EVERYTHING HERE IS LITTLE-ENDIAN!!
+
+[0x1C6] (4 bytes) * 512 = 0x400000
+0x2000 * 0x200 = 0x400000
+
+LBA_begin = 0x2000
+
+bytes per sector = 512
+sectors per cluster = 64
+reserved sectors = 32
+number of FATs = 2
+sectors per FAT = 3816
+root directory - 2
+
+root cluster = 2
+first sector of cluster = ((N - 2) * BPB_SecPerClus) + FirstDataSector
+N is cluster number
+
+0x400000 + (32 * 512) = 0x404000 = FAT #1
+0x404000 + (512 * 3816) = 0x5E1000 = FAT #2
+
+0x5E1000 + (512 * 3816) = 0x7BE000 = Root directory!
+
+cluster of test.txt = 0x0062
+
+0x7BE000 + ((512 * 64) * 0x62) = 0xACE000
+
+0x7BE000 + ((512 * 64) * 0x68) = 0xAFE000, idk if this is correct
